@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        if(speed >= 10 * 10)
+        if (rb.velocity.z >=  12)
         {
             animator.SetBool("RunningFast", true);
             animator.SetBool("RunningSlow", false);
@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context) 
     {
-       animator.SetTrigger("Jumping");
+        inputActionReference.action.Disable();
+        animator.SetTrigger("Jumping");
+        rb.AddForce(Vector3.up * 80, ForceMode.Impulse);
     }
 }
