@@ -1,30 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Scripting.APIUpdating;
 
 public class Player : MonoBehaviour
 {
 
     [SerializeField] private Animator animator;
+    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private InputActionReference inputActionReference;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int speed;
+
+    private void Start()
     {
-        inputActionReference.action.Enable();
+        animator.SetBool("RunningSlow", true);
+    }
+
+    // Start is called before the first frame update
+    void OnEnable()
+    {
         inputActionReference.action.performed += OnJump;
+        inputActionReference.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        inputActionReference.action.performed -= OnJump;
+        inputActionReference.action.Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 
-    void OnJump(InputAction.CallbackContext context) 
+    void FixedUpdate()
     {
-        animator.SetTrigger("Jumping");
+        rb.AddForce(Vector3.forward * speed, ForceMode.Force);
+    }
+
+    private void Move()
+    {
+        if(speed >= 10 * 10)
+        {
+            animator.SetBool("RunningFast", true);
+            animator.SetBool("RunningSlow", false);
+        }
+    }
+
+    private void OnJump(InputAction.CallbackContext context) 
+    {
+       animator.SetTrigger("Jumping");
     }
 }
