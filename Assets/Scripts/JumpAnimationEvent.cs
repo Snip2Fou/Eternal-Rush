@@ -12,13 +12,5 @@ public class JumpAnimationEvent : MonoBehaviour
     public void OnJumpAnimationEnd()
     {
         jumpActionReference.action.Enable();
-        /*if (Physics.Raycast(transform.position, Vector3.down, 1f, groundLayer))
-        {
-            jumpActionReference.action.Enable();
-        }
-        else
-        {
-            Debug.Log("Jump2"); 
-        }*/
     }
 }

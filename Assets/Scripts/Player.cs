@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.Scripting.APIUpdating;
 
 public class Player : MonoBehaviour
@@ -11,9 +12,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
 
-    [SerializeField] private InputActionReference inputActionReference;
+    [SerializeField] private InputActionReference jumpActionReference;
+    [SerializeField] private InputActionReference moveActionReference;
 
-    [SerializeField] private int speed;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f;
+    private Vector3 playerVelocity;
+
+    private bool isGrounded;
+    private bool isJumping;
 
     private void Start()
     {
@@ -23,14 +31,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        inputActionReference.action.performed += OnJump;
-        inputActionReference.action.Enable();
+        jumpActionReference.action.performed += OnJump;
+        jumpActionReference.action.Enable();
+
+        moveActionReference.action.Enable();
     }
 
     void OnDisable()
     {
-        inputActionReference.action.performed -= OnJump;
-        inputActionReference.action.Disable();
+        jumpActionReference.action.performed -= OnJump;
+        jumpActionReference.action.Disable();
+
+        moveActionReference.action.Disable();
     }
 
     // Update is called once per frame
@@ -39,13 +51,10 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    void FixedUpdate()
-    {
-        rb.AddForce(Vector3.forward * speed, ForceMode.Force);
-    }
-
     private void Move()
     {
+        Vector3 movement = new Vector3(moveActionReference.action.ReadValue<float>() * speed, 0, speed);
+        rb.AddForce(movement * speed * Time.deltaTime, ForceMode.Force);
         if (rb.velocity.z >=  12)
         {
             animator.SetBool("RunningFast", true);
@@ -55,8 +64,8 @@ public class Player : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context) 
     {
-        inputActionReference.action.Disable();
+        jumpActionReference.action.Disable();
         animator.SetTrigger("Jumping");
-        rb.AddForce(Vector3.up * 80, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * 300, ForceMode.Impulse);
     }
 }
