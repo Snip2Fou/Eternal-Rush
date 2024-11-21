@@ -53,8 +53,9 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        Vector3 movement = new Vector3(moveActionReference.action.ReadValue<float>() * speed, 0, speed);
-        rb.AddForce(movement * speed * Time.deltaTime, ForceMode.Force);
+        Vector3 movement = new Vector3(0, 0, speed);
+        rb.AddForce(speed * Time.deltaTime * movement, ForceMode.Force);
+        rb.MovePosition(new Vector3(rb.position.x + moveActionReference.action.ReadValue<float>() * Time.deltaTime * 15, rb.position.y, rb.position.z));
         if (rb.velocity.z >=  12)
         {
             animator.SetBool("RunningFast", true);
