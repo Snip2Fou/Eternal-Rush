@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class ProceduralGeneration : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
-    private Vector3 max_position_generate = new Vector3(0,0,250); 
-    [SerializeField] private GameObject terrain;
+    private List<GameObject> objectsList;
 
-    [SerializeField] private List<GameObject> objectsList;
+    [SerializeField] private Transform playerTransform;
+
+    //Generate Variable
+    private Vector3 maxPositionGenerate = new Vector3(0, 0, 250);
+    [SerializeField] private Transform leftFenceTransform;
+    [SerializeField] private Transform rightFenceTransform;
+
+    [SerializeField] private GameObject terrainPrefabs;
+    [SerializeField] private GameObject fencePrefabs;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantiate(fencePrefabs, leftFenceTransform);
     }
 
     // Update is called once per frame
@@ -22,37 +29,55 @@ public class ProceduralGeneration : MonoBehaviour
         if (CheckForGenerate())
         {
             SpawnTerrain();
-            max_position_generate.z += 250;
-            transform.position = max_position_generate;
+
+            maxPositionGenerate.z += 250;
+            transform.position = maxPositionGenerate;
         }
 
         if (CheckForDestroy())
         {
-            for (int i = 0; i < objectsList.Count; i++ )
-            {
-                if (objectsList[i].transform.position.z < playerTransform.position.z - 550)
-                {
-                    Destroy(objectsList[i]);
-                    objectsList.RemoveAt(i);
-                }
-            }
+            StartCoroutine(Destroy());
         }
 
     }
 
     private bool CheckForGenerate()
     {
-        return playerTransform.position.z >= max_position_generate.z - 250;
+        return playerTransform.position.z >= maxPositionGenerate.z - 250;
     }
 
     private bool CheckForDestroy()
     {
         return objectsList[0].transform.position.z < playerTransform.position.z - 550;
     }
+/*
+    private IEnumerator Generate()
+    {
+
+    }*/
+
+    private IEnumerator Destroy()
+    {
+        int i = 0;
+        while (i < objectsList.Count)
+        {
+            if (objectsList[i].transform.position.z < playerTransform.position.z - 550)
+            {
+                Destroy(objectsList[i]);
+                objectsList.RemoveAt(i);
+            }
+            else
+            {
+                break;
+            }
+            i++;
+            yield return null;
+        }
+    }
 
     private void SpawnTerrain()
     {
-        GameObject new_terrain = Instantiate(terrain, transform.position, Quaternion.identity);
+        GameObject new_terrain = Instantiate(terrainPrefabs, transform.position, Quaternion.identity);
         objectsList.Add(new_terrain);
     }
 }
