@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LogHeap_01_b
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b69b231b6ce3a37418c87345ba8cee59, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b69b231b6ce3a37418c87345ba8cee59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.895294

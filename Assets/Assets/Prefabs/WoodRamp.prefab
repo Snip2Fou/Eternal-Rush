@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7864196176161645039}
   m_Layer: 0
   m_Name: WoodRamp
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b69b231b6ce3a37418c87345ba8cee59, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.9230518
+      value: -2.1790524
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b69b231b6ce3a37418c87345ba8cee59, type: 3}
       propertyPath: m_LocalRotation.w
@@ -116,7 +116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 75b366605bacf2a47aa1101444c0b33c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.15
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 75b366605bacf2a47aa1101444c0b33c, type: 3}
       propertyPath: m_LocalScale.z
@@ -128,11 +128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 75b366605bacf2a47aa1101444c0b33c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.618
+      value: 0.774
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 75b366605bacf2a47aa1101444c0b33c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.753
+      value: -2.763
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 75b366605bacf2a47aa1101444c0b33c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43507009ef08f1f42aa8545e7c1b9277, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.92
+      value: -2.176
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43507009ef08f1f42aa8545e7c1b9277, type: 3}
       propertyPath: m_LocalRotation.w
@@ -244,6 +244,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7864196176161645039}
     m_Modifications:
+    - target: {fileID: 1196354927361870104, guid: 97d74088f500278419a77c63e0ada85d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1670496621308462628, guid: 97d74088f500278419a77c63e0ada85d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -293,6 +298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4534169089223987589, guid: 97d74088f500278419a77c63e0ada85d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6311236010938872185, guid: 97d74088f500278419a77c63e0ada85d,
         type: 3}
