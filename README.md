@@ -6,7 +6,7 @@
 1. [Français](#Francais)
    1. [Touches](#InputFr)
 2. [English](#Anglais)
-   1. [Input](#InputEn))
+   1. [Input](#InputEn)
 3. [Credits](#Credits)
 4. [License](#License)
 
